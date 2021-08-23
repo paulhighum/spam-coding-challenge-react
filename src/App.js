@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react';
+import Header from './components/Header'
+import Reports from './components/Reports';
 
-function App() {
+const App = () => {
+  const [reports, setReports] = useState([])
+  
+  useEffect(() => {
+    const getReports = async () => {
+      const reportsFromAPI = await fetchReports()
+      setReports(reportsFromAPI)
+    }
+    getReports()
+  }, [])
+
+  // Fetch Spam Reports
+  const fetchReports = async () => {
+    const res = await fetch('http://localhost:3000/reports')
+    const data = await res.json()
+    return data
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <Header />
+      <Reports reports={reports}/>
     </div>
   );
 }
-
 export default App;
