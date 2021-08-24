@@ -23,7 +23,7 @@ const App = () => {
   return (
     <div className='App'>
       <Header />
-      <Reports reports={reports}/>
+      <Reports reports={reports} setReports={setReports}/>
     </div>
   );
 }

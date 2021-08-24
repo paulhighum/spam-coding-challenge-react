@@ -1,13 +1,13 @@
 import Report from './Report'
 
-const Reports = ({ reports }) => {
-    console.log(reports)
+const Reports = ({ reports, setReports }) => {
     return (
         <>
             {reports.map((report) => (
                 <Report 
                     key={report.id}
                     report={report}
+                    setReports={setReports}
                 />
             ))}
         </>
