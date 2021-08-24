@@ -33,7 +33,7 @@ body {
   padding: 10px 20px;
 }
 
-.btn {
+.btn, .btn-inactive {
   display: inline-block;
   padding: 10px 20px;
   margin: 5px;
@@ -44,6 +44,13 @@ body {
   text-decoration: none;
   font-size: 15px;
   font-family: inherit;
+}
+
+.btn:hover {
+  border-color:orange;
+  border-width: 1px;
+  box-shadow: none;
+  color: orange;
 }
 
 footer {

@@ -4,7 +4,7 @@ const Button = ({ text, onClick, cursor, disabled }) => {
             onClick={onClick}
             style={{cursor: cursor}}
             disabled={disabled}
-            className='btn'
+            className={disabled ? 'btn-inactive' : 'btn'}
         >
             {text} 
         </button>
