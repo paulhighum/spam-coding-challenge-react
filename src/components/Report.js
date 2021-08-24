@@ -1,24 +1,39 @@
 import Button from './Button'
 
-const Report = ({ report, setReports }) => {
+const Report = ({ report, setReports, filterReports }) => {
 
+    // Put req to block report, returns all reports, filters out resolved, and resets state
     const blockReport = async (e) => {
-        console.log(e.target.parentElement.id)
-        const res = await fetch(`http://localhost:3000/reports/${e.target.parentElement.id}/block`, {
-            method: 'PUT',
-            headers:{'Content-Type':'application/json'}
-        })
-        const data = await res.json()
-        console.log(data)
-        setReports(data)
+        try {
+            const res = await fetch(`http://localhost:3000/reports/${e.target.parentElement.id}/block`, {
+                method: 'PUT',
+                headers:{'Content-Type':'application/json'}
+            })
+            const data = await res.json()
+            const dataToDisplay = filterReports(data)
+            setReports(dataToDisplay)
+        } catch(err){
+            console.log(err)
+        }
     }
 
-    const resolveReport = () => {
-        console.log('clicked')
+    // Put req to resolve report, returns all reports, filters out resolved, and resets state
+    const resolveReport = async (e) => {
+        try {
+            const res = await fetch(`http://localhost:3000/reports/${e.target.parentElement.id}/resolve`, {
+                method: 'PUT',
+                headers:{'Content-Type':'application/json'}
+            })
+            const data = await res.json()
+            const dataToDisplay = filterReports(data)
+            setReports(dataToDisplay)
+        } catch(err){
+            console.log(err)
+        }
     }
 
     return (
-        <div id={report.id}>
+        <div id={report.id} className='report'>
             <p>ID: {report.id}</p>
             <p>Type: {report.payload.reportType}</p>
             <p>State: {report.ticketState}</p>

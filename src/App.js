@@ -8,7 +8,8 @@ const App = () => {
   useEffect(() => {
     const getReports = async () => {
       const reportsFromAPI = await fetchReports()
-      setReports(reportsFromAPI)
+      const reportsForDisplay = filterReports(reportsFromAPI)
+      setReports(reportsForDisplay)
     }
     getReports()
   }, [])
@@ -20,10 +21,19 @@ const App = () => {
     return data
   }
 
+  // Filter Closed Spam Reports
+  const filterReports = (reportsArr) => {
+    return reportsArr.filter(report => report.ticketState === 'OPEN')
+  }
+
   return (
     <div className='App'>
       <Header />
-      <Reports reports={reports} setReports={setReports}/>
+      <Reports 
+        reports={reports} 
+        setReports={setReports}
+        filterReports={filterReports}
+      />
     </div>
   );
 }
