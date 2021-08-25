@@ -3,9 +3,9 @@ import Button from './Button'
 const Report = ({ report, setReports, filterReports }) => {
 
     // Put req to block report, returns all reports, filters out resolved, and resets state
-    const blockReport = async (e) => {
+    const blockReport = async (reportId) => {
         try {
-            const res = await fetch(`http://localhost:3000/reports/${e.target.parentElement.id}/block`, {
+            const res = await fetch(`http://localhost:3000/reports/${reportId}/block`, {
                 method: 'PUT',
                 headers:{'Content-Type':'application/json'}
             })
@@ -18,9 +18,9 @@ const Report = ({ report, setReports, filterReports }) => {
     }
 
     // Put req to resolve report, returns all reports, filters out resolved, and resets state
-    const resolveReport = async (e) => {
+    const resolveReport = async (reportId) => {
         try {
-            const res = await fetch(`http://localhost:3000/reports/${e.target.parentElement.id}/resolve`, {
+            const res = await fetch(`http://localhost:3000/reports/${reportId}/resolve`, {
                 method: 'PUT',
                 headers:{'Content-Type':'application/json'}
             })
@@ -42,9 +42,13 @@ const Report = ({ report, setReports, filterReports }) => {
                 text={report.viewState === 'BLOCKED' ? 'Already Blocked' : 'Block'}
                 cursor={report.viewState === 'BLOCKED' ? 'not-allowed' : 'pointer'}
                 disabled={report.viewState === 'BLOCKED' ? true : false}
-                onClick={blockReport}
+                onClick={() => {
+                    blockReport(report.id)
+                }}
             />
-            <Button text='Resolve' onClick={resolveReport}/>
+            <Button text='Resolve' onClick={() => {
+                resolveReport(report.id)
+            }}/>
         </div>
     )
 }
