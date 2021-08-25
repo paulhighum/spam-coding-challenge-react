@@ -40,7 +40,6 @@ const Report = ({ report, setReports, filterReports }) => {
             <p>Message: {report.payload.message}</p>
             <Button 
                 text={report.viewState === 'BLOCKED' ? 'Already Blocked' : 'Block'}
-                cursor={report.viewState === 'BLOCKED' ? 'not-allowed' : 'pointer'}
                 disabled={report.viewState === 'BLOCKED' ? true : false}
                 onClick={() => {
                     blockReport(report.id)
