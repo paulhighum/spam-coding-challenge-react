@@ -47,17 +47,19 @@ body {
 
 .btn {
   cursor: pointer;
+  background-color: palegreen;
 }
 
 .btn:hover {
-  border-color:orange;
+  border-color:darkgreen;
   border-width: 1px;
   box-shadow: none;
-  color: orange;
+  color: darkgreen;
 }
 
 .btn-inactive {
   cursor: not-allowed;
+  background-color: salmon;
 }
 
 footer {
