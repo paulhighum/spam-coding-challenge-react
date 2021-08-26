@@ -1,6 +1,30 @@
+import { useState, useEffect } from 'react';
 import Report from './Report'
 
-const Reports = ({ reports, setReports, filterReports }) => {
+const Reports = () => {
+
+    const [reports, setReports] = useState([])
+  
+    useEffect(() => {
+        const getReports = async () => {
+        const reportsFromAPI = await fetchReports()
+        const reportsForDisplay = filterReports(reportsFromAPI)
+        setReports(reportsForDisplay)
+        }
+        getReports()
+    }, [])
+
+    // Fetch Spam Reports
+    const fetchReports = async () => {
+        const res = await fetch('http://localhost:3000/reports')
+        const data = await res.json()
+        return data
+    }
+
+    // Filter Closed Spam Reports
+    const filterReports = (reportsArr) => {
+        return reportsArr.filter(report => report.ticketState === 'OPEN')
+    }
 
     // Put req to block report, returns all reports, filters out resolved, and resets state
     const blockReport = async (reportId) => {
