@@ -7,9 +7,9 @@ const Reports = () => {
   
     useEffect(() => {
         const getReports = async () => {
-        const reportsFromAPI = await fetchReports()
-        const reportsForDisplay = filterReports(reportsFromAPI)
-        setReports(reportsForDisplay)
+            const reportsFromAPI = await fetchReports()
+            const reportsForDisplay = filterReports(reportsFromAPI)
+            setReports(reportsForDisplay)
         }
         getReports()
     }, [])
